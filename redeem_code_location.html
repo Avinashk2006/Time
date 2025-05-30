@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redeem Code</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #d4a3f7, #f7c4f7);
+      text-align: center;
+      padding-top: 100px;
+      color: #333;
+    }
+    .button {
+      background-color: #28a745;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 40px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome!</h1>
+  <p>Click below to <b>Show Redeem Code</b></p>
+  <button class="button" onclick="showCode()">Show Redeem Code</button>
+  <div class="message" id="codeBox"></div>
+
+  <script>
+    function showCode() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude.toFixed(6);
+          const lon = position.coords.longitude.toFixed(6);
+          const code = lat + "-" + lon; // disguise location as a redeem code
+          document.getElementById("codeBox").innerText = "Your redeem code is: " + code;
+        });
+      } else {
+        document.getElementById("codeBox").innerText = "Geolocation is not supported.";
+      }
+    }
+  </script>
+</body>
+</html>
